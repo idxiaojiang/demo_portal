@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.portal.manage.dao.ISystemConfigDao" >
+	<select id="getSystemConfAll" resultType="com.portal.base.entity.SystemParamsVO">
+		SELECT
+			t.id id,
+			t.attribute_key attributeKey,
+			t.attribute_value attributeValue,
+			t.attribute_module attributeModule,
+			t.attribute_enable attributeEnable,
+			t.environment environment,
+			t.created_date createDate,
+			t.last_update_date lastUpdateDate
+		FROM
+			t_system_config t
+		WHERE 1 = 1 
+			<if test='attributeKey != null'>
+				and t.attribute_key = #{attributeKey}
+			</if>
+			<if test='attributeEnable != null'>
+				and t.attribute_enable = #{attributeEnable}
+			</if>
+			and (t.attribute_module = 'all'
+				<if test='attributeModule != null'>
+					or t.attribute_module = #{attributeModule}
+				</if>
+			)
+			and (t.environment = 'all'
+				<if test='environment != null'>
+					or t.environment = #{environment}
+				</if>
+			)
+			order by t.last_update_date desc
+	</select>
+</mapper>

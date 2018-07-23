@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.portal.note.dao.INoteProcessDao" >
+	<select id="getNoteDetail" resultType="com.portal.note.entity.NoteDetailVO">
+		SELECT
+			t.row_id rowId,
+			t.title title,
+			t.comment_num commentNum,
+			t.read_num readNum,
+			t.create_userid createUserId,
+			t.content_html contentHtml,
+			t.note_type noteType,
+			t.note_state noteSate,
+			t.flow_state flowSate,
+			t.created_date createdDate,
+			t.last_update_date lastUpdateDate
+		FROM
+			t_note_detail t
+		WHERE 1=1
+			and t.row_id = #{rowId}
+	</select>
+	
+</mapper>

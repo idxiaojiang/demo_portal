@@ -1,0 +1,33 @@
+.article-container{
+	-webkit-border-radius: 10px;
+    border-radius: 10px;
+	min-height: 900px;
+	width: 90%;
+	border: 1px;
+/* 	background-color:#f1f1f1; */
+	background-color:white;
+	margin:100px auto 5% auto;
+	opacity:0.95;
+}
+.article-title{
+	width:80%;
+	margin:30px auto auto auto;
+	min-height:50px;
+	text-align: left;
+	padding-top: 25px;
+	padding-bottom: 10px;
+}
+.article-content{
+	width: 80%;
+	margin:0 auto auto auto;
+	min-height: 300px;
+	text-align: left;
+	padding-bottom: 25px;
+	max-width: 80%;
+}
+.article-content img{
+	max-width: 100%;
+}
+.article-container iframe{
+	margin-left: 10%;
+}

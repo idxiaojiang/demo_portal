@@ -1,0 +1,39 @@
+body{
+	color: #333333;
+	background-color:#ffffff;
+	background-image:url("../img/bgimg.jpg"); 
+	background-attachment: fixed;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 0;
+	font-size: 16px;
+}
+#root{
+	display: block;
+	background-color:#ffffff; 
+	height:100% ; 
+	width:100%; 
+	position:absolute;
+	padding:0;
+}
+.heard{
+	width:100%;
+	height: 60px;
+	background-color:#f1f1f1;
+	margin: 0 0 auto auto;
+	border-width: 0 0 1px;
+	padding:0;
+	opacity:0.8;
+}
+.operate button{
+	opacity:1;
+}
+card {
+ box-shadow: 04px8px0rgba(0, 0, 0, 0.2), 06px20px0rgba(0, 0, 0, 0.19);
+ text-align: center;
+}
+hr{
+	width: 100%;
+	size:2px;
+	color: red;
+	z-index:9999;
+}
