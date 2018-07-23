@@ -1,0 +1,57 @@
+.article-container {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	min-height: 900px;
+	width: 90%;
+	border: 1px;
+	background-color: white;
+	margin: 100px auto 5% auto;
+	opacity: 0.95;
+	position: relative;
+}
+
+.note-more {
+	height: 40px;
+	width: 100%;
+	color: #f69;
+}
+
+.note-more p {
+	bottom: 0px;
+	padding: 0px;
+	margin-bottom: 0px;
+	line-height: 60px;
+	font-size: 18px;
+	border-bottom: 1px double #f69;
+}
+
+.article-note {
+	-webkit-border-radius: 10px;
+	width: 95%;
+	margin: 30px auto;
+	line-height: 10px;
+}
+
+.note-list img {
+	height: 60px;
+	width: 80px;
+}
+
+ul {
+	list-style: none;
+	padding: 10px;
+	list-style-type: none;
+}
+
+li {
+	height: 80px;
+	line-height: 70px;
+	border-bottom: 1px dashed #CCCCCC;
+	overflow: hidden;
+	padding-top: 10px;
+	font-size: 18px;
+}
+
+a span {
+	margin-left: 10px;
+}

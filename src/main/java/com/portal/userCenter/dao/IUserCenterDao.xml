@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.portal.userCenter.dao.IUserCenterDao" >
+	<select id="getNoteDetailList" resultType="com.portal.note.entity.NoteDetailVO">
+		SELECT
+			t.row_id rowId,
+			t.title title,
+			t.comment_num commentNum,
+			t.read_num readNum,
+			t.create_userid createUserId,
+			t.module module,
+			t.note_type noteType,
+			t.note_state noteSate,
+			t.flow_state flowSate,
+			t.create_date createDate,
+			t.last_update_date lastUpdateDate
+		FROM
+			t_note_detail t
+	</select>
+	<insert id="insertNoteDetail">
+		insert into t_note_detail 
+			(row_id,
+			title,
+			content_html,
+			content_text,
+			coverImage_url,
+			created_date,
+			last_update_date)
+		values(
+			#{rowId},
+			#{title},
+			#{contentHtml},
+			#{contentText},
+			#{coverImageUrl},
+			now(),
+			now()
+		)
+	</insert>
+	<insert id="insertNoteCover">
+		
+	</insert>
+</mapper>

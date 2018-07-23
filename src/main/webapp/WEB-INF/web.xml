@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>portal</display-name>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:config/log4j.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>loggingLevel</param-name>
+		<param-value>info</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:config/applicationContext-*.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.portal.base.listener.InitSystemListener</listener-class>
+	</listener>
+	
+	<!-- servlet begin -->
+	<servlet-mapping>
+		<servlet-name>SpringDispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SpringDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:config/applicationContext-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>/views/index.html</url-pattern>
+		<url-pattern>/views/common/*</url-pattern>
+	</servlet-mapping>
+	<!-- sesrvlet end -->
+	
+	<!-- filter begin -->
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<description>使用spring编码的filter</description>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/userCenter/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<description>登陆认证filter</description>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.portal.base.filter.LoginFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<!-- filter end -->
+	
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/c.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/index</location>
+	</error-page>
+</web-app>

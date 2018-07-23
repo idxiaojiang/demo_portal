@@ -1,0 +1,74 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
+
+	<!-- 加载数据源配置参数 -->
+	<context:property-placeholder location="classpath:config/jdbc.properties" />
+
+	<!-- 数据库连接池 DriverManagerDataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxWait" value="${jdbc.maxWait}" />
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+
+	<!-- mybatis的SqlSession工厂: SqlSessionFactoryBean.使用前边dataSource定义的数据源 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- <property name="configLocation" value="classpath:config/myBatisConfig.xml"></property> -->
+	</bean>
+
+	<!-- Dao接口所在包名，Spring会自动查找其下的类 ,包下的类需要使用@MapperScan注解,否则容器注入会失败 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+			value="com.portal.index.dao,com.portal.manage.dao,com.portal.note.dao,com.portal.userCenter.dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 使用声明式事务,创建transactionManager -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- springAOP配置 -->
+	<aop:config>
+		<!-- 定义切入点 -->
+		<aop:pointcut id="noteDaoPointcut"
+			expression="execution(* com.portal.note.dao.*.*(..))" />
+		<!-- 切入点需要执行的事物操作 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="noteDaoPointcut" />
+	</aop:config>
+
+</beans>
