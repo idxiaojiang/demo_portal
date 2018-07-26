@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.portal.base.utility.SmsClient;
 import com.portal.manage.service.ISystemConfigService;
 
 
@@ -35,10 +36,12 @@ public class InitSystemListener implements ServletContextListener {
 		try {
 			iSystemConfigService.initSystemConfig();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER_.error("读取系统初始化配置失败",e);
 		}
 		LOGGER_.info("============系统初始化设置---> 1 读取系统初始化配置项 end");
 		LOGGER_.info("============系统初始化设置 end");
+		
+		SmsClient.getInstance();
 	}
 
 }

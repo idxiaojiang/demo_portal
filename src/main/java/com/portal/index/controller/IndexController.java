@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.portal.base.entity.SmsParamsVO;
+import com.portal.base.utility.SmsClient;
 import com.portal.note.entity.NoteDetailVO;
 import com.portal.note.service.IIndexService;
 
@@ -36,6 +38,20 @@ public class IndexController {
 			LOGGER_.error("getDefaultArticle error:", e);
 		}
 		return modelAndView;
+	}
+	
+	@RequestMapping(value={"/sendSms"})
+	public void sendSms() {
+		try {
+			for (int i = 0; i < 10; i++) {
+				SmsParamsVO paramsVO = new SmsParamsVO();
+				paramsVO.setPhoneNumbers("15986746869");
+				paramsVO.setTemplateParam("{\"code\":\""+System.currentTimeMillis()+"\"}");
+				SmsClient.getInstance().sendMessage(paramsVO);
+			}
+		} catch (Exception e) {
+			LOGGER_.error("sendSms error:", e);
+		}
 	}
 	
 }
