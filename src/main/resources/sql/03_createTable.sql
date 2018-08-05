@@ -40,7 +40,6 @@ CREATE TABLE `t_note_detail` (
 
 DROP TABLE IF EXISTS `t_system_config`;
 CREATE TABLE `t_system_config` (
-  `id` int(20) NOT NULL,
   `attribute_key` varchar(20) NOT NULL COMMENT '属性key',
   `attribute_value` varchar(100) NOT NULL COMMENT '属性value',
   `attribute_module` varchar(20) NOT NULL COMMENT '属性所属模块',
@@ -48,5 +47,5 @@ CREATE TABLE `t_system_config` (
   `environment` varchar(10) NOT NULL COMMENT '系统环境，all/dev/sit/pro',
   `created_date` datetime DEFAULT NULL COMMENT '创建时间',
   `last_update_date` datetime DEFAULT NULL COMMENT '最后一次修改时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`attribute_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

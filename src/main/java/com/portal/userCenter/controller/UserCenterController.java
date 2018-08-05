@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.portal.base.CommonUtils;
 import com.portal.base.SystemParams;
 import com.portal.base.entity.ResultDataVO;
+import com.portal.base.utility.CommonUtils;
 import com.portal.note.entity.NoteDetailVO;
 import com.portal.userCenter.service.IUserCenterService;
 
@@ -86,7 +86,7 @@ public class UserCenterController {
 			//创建目标文件夹路径
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String currDate = dateFormat.format(System.currentTimeMillis());
-			String realPath = SystemParams.getSystemItemValue("upload_path_temp")+SystemParams.getSystemItemValue("note_image_path")+currDate;
+			String realPath = SystemParams.getItemVal("upload_path_temp")+SystemParams.getItemVal("note_image_path")+currDate;
 			
 			//创建文件前缀名
 			String prefix = (int) (Math.random() * 100000) + "" + System.currentTimeMillis();

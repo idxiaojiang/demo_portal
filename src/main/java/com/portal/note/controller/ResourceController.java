@@ -12,8 +12,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.portal.base.CommonUtils;
 import com.portal.base.SystemParams;
+import com.portal.base.utility.CommonUtils;
 
 @Controller
 @RequestMapping("/resource")
@@ -30,11 +30,11 @@ public class ResourceController {
 			String referer = httpServletRequest.getHeader("Referer");
 			if (!StringUtils.isEmpty(referer)) {
 				if (referer.contains("/userCenter/publish")) {
-					String uploadPath = SystemParams.getSystemItemValue("upload_path_temp");
+					String uploadPath = SystemParams.getItemVal("upload_path_temp");
 					String imagePath = uploadPath + "image\\" + uploadDate + "\\" + imageName;
 					CommonUtils.httpWriteImage(httpServletRequest, httpServletResponse, imagePath);
 				} else {
-					String uploadPath = SystemParams.getSystemItemValue("upload_path");
+					String uploadPath = SystemParams.getItemVal("upload_path");
 					String imagePath = uploadPath + "image\\" + uploadDate + "\\" + imageName;
 					CommonUtils.httpWriteImage(httpServletRequest, httpServletResponse, imagePath);
 				}

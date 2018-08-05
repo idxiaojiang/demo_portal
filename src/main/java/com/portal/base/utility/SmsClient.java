@@ -1,6 +1,5 @@
 package com.portal.base.utility;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -49,16 +48,16 @@ public class SmsClient {
 
 	private void checkSmsParams(SmsParamsVO smsParamsVO) {
 		if (null == smsParamsVO.getAccessKeyId()) {
-			smsParamsVO.setAccessKeyId(SystemParams.getSystemItemValue("accessKeyId"));
+			smsParamsVO.setAccessKeyId(SystemParams.getItemVal("accessKeyId"));
 		}
 		if (null == smsParamsVO.getAccessKeySecret()) {
-			smsParamsVO.setAccessKeySecret(SystemParams.getSystemItemValue("accessKeySecret"));
+			smsParamsVO.setAccessKeySecret(SystemParams.getItemVal("accessKeySecret"));
 		}
 		if (null == smsParamsVO.getSignName()) {
-			smsParamsVO.setSignName(SystemParams.getSystemItemValue("signName"));
+			smsParamsVO.setSignName(SystemParams.getItemVal("signName"));
 		}
 		if (null == smsParamsVO.getTemplateCode()) {
-			smsParamsVO.setTemplateCode(SystemParams.getSystemItemValue("templateCode"));
+			smsParamsVO.setTemplateCode(SystemParams.getItemVal("templateCode"));
 		}
 	}
 

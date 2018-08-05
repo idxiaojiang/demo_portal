@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.portal.base.CommonConstant;
-import com.portal.base.CommonUtils;
 import com.portal.base.SystemParams;
 import com.portal.base.entity.ResultDataVO;
+import com.portal.base.utility.CommonUtils;
 import com.portal.note.entity.NoteDetailVO;
 import com.portal.userCenter.dao.IUserCenterDao;
 import com.portal.userCenter.service.IUserCenterService;
@@ -42,9 +42,9 @@ public class UserCenterService implements IUserCenterService {
 		List<String> imgNameList = this.resolveImgName(noteDetailVO);
 		
 		//3.copy资源文件从临时目录拷贝到正式目录
-		String imagePaht = SystemParams.getSystemItemValue("note_image_path");
-		String sourcePath = SystemParams.getSystemItemValue("upload_path_temp") + imagePaht+"/";
-		String targetPath = SystemParams.getSystemItemValue("upload_path") + imagePaht+"/";
+		String imagePaht = SystemParams.getItemVal("note_image_path");
+		String sourcePath = SystemParams.getItemVal("upload_path_temp") + imagePaht+"/";
+		String targetPath = SystemParams.getItemVal("upload_path") + imagePaht+"/";
 		for (String fileName : imgNameList) {
 			fileName = fileName.replace("_", ".");
 			CommonUtils.copyFileNoDel(sourcePath+fileName, targetPath+fileName);
@@ -69,7 +69,7 @@ public class UserCenterService implements IUserCenterService {
 		while(matcher.find()){
 			String htmlEle = matcher.group(0);
 			String imgUrl = htmlEle.substring(htmlEle.indexOf("\"")+1,htmlEle.lastIndexOf("\""));
-			imgList.add(imgUrl.substring(imgUrl.lastIndexOf(SystemParams.getSystemItemValue("note_image_path"))+6));
+			imgList.add(imgUrl.substring(imgUrl.lastIndexOf(SystemParams.getItemVal("note_image_path"))+6));
 //			imgList.add(imgUrl);
 		}
 		return imgList;
