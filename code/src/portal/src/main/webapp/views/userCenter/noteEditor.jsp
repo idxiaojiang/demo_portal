@@ -58,6 +58,6 @@
 		</div>
 	</div>
 	<script type="text/javascript"
-		src="../views/common/plugin/wangEditor-3.1.0/release/wangEditor.min.js"></script>
+		src="<%=request.getContextPath()%>/views/common/plugin/wangEditor-3.1.0/release/wangEditor.min.js"></script>
 </body>
 </html>

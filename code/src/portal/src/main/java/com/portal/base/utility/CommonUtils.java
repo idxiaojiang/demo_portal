@@ -1,4 +1,4 @@
-package com.portal.base;
+package com.portal.base.utility;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +36,7 @@ public class CommonUtils {
 	 * 
 	 * @param httpServletRequest
 	 * @param httpServletResponse
+	 * @param imageUrl 图片物理路径
 	 */
 	public static void httpWriteImage(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			String imageUrl) {

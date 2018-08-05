@@ -4,6 +4,21 @@ public class UserInfoVo {
 	private String username;
 	private String password;
 	private String account;
+	private String verifyCode;
+	private String loginError;
+	
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+	public String getLoginError() {
+		return loginError;
+	}
+	public void setLoginError(String loginError) {
+		this.loginError = loginError;
+	}
 	public String getUsername() {
 		return username;
 	}

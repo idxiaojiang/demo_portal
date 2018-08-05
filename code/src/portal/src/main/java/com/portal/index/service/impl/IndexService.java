@@ -19,7 +19,7 @@ public class IndexService implements IIndexService {
 
 	@Override
 	public List<NoteDetailVO> getNoteByHot() {
-		int num = Integer.parseInt(SystemParams.getSystemItemValue("index_hot_num"));
+		int num = Integer.parseInt(SystemParams.getItemVal("index_hot_num"));
 		PagedVO pagedVO = new PagedVO();
 		pagedVO.setStartRow(0);
 		pagedVO.setEndRow(num);
@@ -29,7 +29,7 @@ public class IndexService implements IIndexService {
 
 	@Override
 	public List<NoteDetailVO> getNoteByDate() {
-		int num = Integer.parseInt(SystemParams.getSystemItemValue("index_new_num"));
+		int num = Integer.parseInt(SystemParams.getItemVal("index_new_num"));
 		PagedVO pagedVO = new PagedVO();
 		pagedVO.setStartRow(0);
 		pagedVO.setEndRow(num);

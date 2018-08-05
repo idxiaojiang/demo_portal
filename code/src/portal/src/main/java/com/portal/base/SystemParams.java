@@ -51,7 +51,7 @@ public class SystemParams {
 	 * @param itemKey
 	 * @return
 	 */
-	public static String getSystemItemValue(String itemKey) {
+	public static String getItemVal(String itemKey) {
 		SystemParamsVO configVO = SystemParams.sysConfMap.get(itemKey);
 		if (configVO == null) {
 			LOGGER_.error("从系统配置项中未找到 "+itemKey+" 的配置对象");

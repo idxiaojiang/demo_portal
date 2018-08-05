@@ -12,10 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.portal.base.CommonUtils;
+import com.portal.base.utility.CommonUtils;
 import com.portal.login.entity.UserInfoVo;
 
 @Controller
@@ -44,9 +43,10 @@ public class LoginController {
 			HashMap<String, String> map = CommonUtils.AnalyzeURLParams(referer);
 			redirectUrl = map.get("redirectUrl");
 		}
-
+		
+		//判断是否填写账号密码
 		HttpSession httpSession = httpServletRequest.getSession(true);
-		if (null == httpSession.getAttribute("username")) {
+		if (null == httpSession.getAttribute("username") || null == httpSession.getAttribute("password")) {
 			httpSession.setAttribute("userinfo", infoVo);
 			httpSession.setAttribute("username", infoVo.getUsername());
 			mav.setViewName("redirect:" + redirectUrl);

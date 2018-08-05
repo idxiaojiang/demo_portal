@@ -41,6 +41,7 @@ public class InitSystemListener implements ServletContextListener {
 		LOGGER_.info("============系统初始化设置---> 1 读取系统初始化配置项 end");
 		LOGGER_.info("============系统初始化设置 end");
 		
+		//短信工具类初始化
 		SmsClient.getInstance();
 	}
 
