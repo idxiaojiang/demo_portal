@@ -16,7 +16,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import com.portal.base.CommonConstant;
+import com.portal.base.CommConst;
 import com.portal.base.SystemParams;
 
 /**
@@ -61,7 +61,7 @@ public class VerifyCodeUtils {
      * @return
      */
     public static String outputVerifyImageRetPath(String code){
-    	String dir = SystemParams.getItemVal(CommonConstant.upload_path_temp) + SystemParams.getItemVal(CommonConstant.verifyCode_path);
+    	String dir = SystemParams.getItemVal(CommConst.SysParamKey.UPLOAD_PATH) + SystemParams.getItemVal(CommConst.SysParamKey.VERIFYCODE_PATH);
     	String codeImgName = System.currentTimeMillis() + ".jpg";
          try {
         	 File file = new File(dir, codeImgName);

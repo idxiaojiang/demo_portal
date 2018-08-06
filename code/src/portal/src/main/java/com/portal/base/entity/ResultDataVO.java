@@ -4,6 +4,11 @@ public class ResultDataVO<T> {
 	private int code;
 	private String message;
 	private T result;
+	
+	/**
+	 * 附带操作
+	 */
+	private String operate;
 
 	public ResultDataVO() {
 		this.code = 200;
@@ -17,6 +22,15 @@ public class ResultDataVO<T> {
 		this.code = code;
 		this.message = message;
 		this.result = result;
+	}
+
+	
+	public String getOperate() {
+		return operate;
+	}
+
+	public void setOperate(String operate) {
+		this.operate = operate;
 	}
 
 	public int getCode() {

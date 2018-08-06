@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.portal.base.CommonConstant;
+import com.portal.base.CommConst;
 import com.portal.base.SystemParams;
 import com.portal.base.entity.SystemParamsVO;
 import com.portal.manage.dao.ISystemConfigDao;
@@ -32,7 +32,7 @@ public class SystemConfigService implements ISystemConfigService {
 
 		SystemParamsVO systemConfigVO = new SystemParamsVO();
 		systemConfigVO.setAttributeEnable("true");
-		systemConfigVO.setAttributeKey(CommonConstant.SERVER_ENV_KEY);
+		systemConfigVO.setAttributeKey(CommConst.SysParamKey.SERVER_ENV_KEY);
 		String server_env = null;
 
 		// 1.先读取系统当前的环境配置类型

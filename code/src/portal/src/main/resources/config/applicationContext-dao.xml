@@ -40,7 +40,7 @@
 	<!-- Dao接口所在包名，Spring会自动查找其下的类 ,包下的类需要使用@MapperScan注解,否则容器注入会失败 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage"
-			value="com.portal.index.dao,com.portal.manage.dao,com.portal.note.dao,com.portal.userCenter.dao"></property>
+			value="com.portal.index.dao,com.portal.manage.dao,com.portal.note.dao,com.portal.userCenter.dao,com.portal.login.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
