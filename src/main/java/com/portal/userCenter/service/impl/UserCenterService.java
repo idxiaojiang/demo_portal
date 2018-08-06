@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.portal.base.CommonConstant;
+import com.portal.base.CommConst;
 import com.portal.base.SystemParams;
 import com.portal.base.entity.ResultDataVO;
-import com.portal.base.utility.CommonUtils;
+import com.portal.base.utility.CommUtils;
 import com.portal.note.entity.NoteDetailVO;
 import com.portal.userCenter.dao.IUserCenterDao;
 import com.portal.userCenter.service.IUserCenterService;
@@ -47,9 +47,9 @@ public class UserCenterService implements IUserCenterService {
 		String targetPath = SystemParams.getItemVal("upload_path") + imagePaht+"/";
 		for (String fileName : imgNameList) {
 			fileName = fileName.replace("_", ".");
-			CommonUtils.copyFileNoDel(sourcePath+fileName, targetPath+fileName);
+			CommUtils.copyFileNoDel(sourcePath+fileName, targetPath+fileName);
 		}
-		noteDetailVO.setRowId(CommonUtils.createRowId());
+		noteDetailVO.setRowId(CommUtils.createRowId());
 		noteDetailVO.setFlowState(200);
 		noteDetailVO.setNoteState(200);
 		iUserCenterDao.insertNoteDetail(noteDetailVO);
@@ -84,13 +84,13 @@ public class UserCenterService implements IUserCenterService {
 	private boolean verifyInputData(NoteDetailVO noteDetailVO, ResultDataVO<Object> dataVO){
 		String contentHtml = noteDetailVO.getContentHtml();
 		String title = noteDetailVO.getTitle();
-		if (!StringUtils.isEmpty(title) && title.length() > CommonConstant.NOTE_TITLE_LENGTH) {
-			dataVO.setCode(CommonConstant.INPUT_EXCEPTION);
+		if (!StringUtils.isEmpty(title) && title.length() > CommConst.AppConf.NOTE_TITLE_LENGTH) {
+			dataVO.setCode(CommConst.HttpRespCode.INPUT_EXCEPTION);
 			dataVO.setMessage("必须填写标题，且标题不能多于50个字");
 			return false;
 		}
 		if (StringUtils.isEmpty(contentHtml) || StringUtils.isEmpty(noteDetailVO.getContentText())) {
-			dataVO.setCode(CommonConstant.INPUT_EXCEPTION);
+			dataVO.setCode(CommConst.HttpRespCode.INPUT_EXCEPTION);
 			dataVO.setMessage("必须填写文章内容");
 			return false;
 		}

@@ -23,12 +23,17 @@
 				<div>
 					<input type="text" placeholder="验证码" required="required" id="verifyCode" name="verifyCode"/>
 				</div>
-				<div class="verifyCode">
-					<img alt="点击刷新验证码" src="<%=request.getContextPath()%>/test/verifyCode/login">
-				</div>
-				<div class="">
-					<span class="help-block u-errormessage" style="color:red" id="js-server-helpinfo">ssssssss</span>
-				</div>
+				<c:if test="${resultData.operate == 'verifyCode' }">
+					<div class="verifyCode">
+						<img alt="点击刷新验证码" src="<%=request.getContextPath()%>/test/verifyCode/login">
+					</div>
+				</c:if>
+				<c:if test="${resultData.code != 200 }">
+					<div class="">
+						<span class="help-block u-errormessage" style="color:red" id="js-server-helpinfo">${resultData.message }</span>
+					</div>
+				</c:if>
+
 				<div>
 					<input type="submit" value="登录" class="btn btn-primary"
 						id="js-btn-login" />

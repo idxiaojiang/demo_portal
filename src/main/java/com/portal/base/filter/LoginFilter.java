@@ -14,6 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.portal.base.CommConst;
+import com.portal.base.utility.CommUtils;
+import com.portal.login.entity.CurrentSessionDetail;
+
 public class LoginFilter implements Filter {
 	private static final Logger LOGGER_ = Logger.getLogger(LoginFilter.class);
 
@@ -27,14 +31,15 @@ public class LoginFilter implements Filter {
 		LOGGER_.info("用户登录验证 begin");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		HttpSession session = httpRequest.getSession(true);
 		String url = httpRequest.getRequestURL().toString();
 		String contextPath = httpRequest.getContextPath();
-		if (null == session.getAttribute("username")) {
+
+		CurrentSessionDetail currentSessionDetail = CommUtils.getCurrentSession(httpRequest);
+		if (null == currentSessionDetail.getCurrUserName()) {
 			LOGGER_.info("用户未登录，跳转登录");
 			httpResponse.sendRedirect(contextPath + "/login?redirectUrl=" + url);
 		} else {
-			LOGGER_.info("用户已登录：" + session.getAttribute("username"));
+			LOGGER_.info("用户已登录：" + currentSessionDetail.getCurrUserName());
 			chain.doFilter(httpRequest, httpResponse);
 		}
 		LOGGER_.info("用户登录验证 end");

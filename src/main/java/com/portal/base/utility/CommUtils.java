@@ -11,13 +11,23 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
-public class CommonUtils {
-	private static Logger LOGGER_ = Logger.getLogger(CommonUtils.class);
+import com.portal.base.CommConst;
+import com.portal.login.entity.CurrentSessionDetail;
+
+/**
+ * 公共工具类
+ * 
+ * @author Administrator
+ *
+ */
+public class CommUtils {
+	private static Logger LOGGER_ = Logger.getLogger(CommUtils.class);
 
 	public static String createRowId() {
 		String timeMillis = String.valueOf(System.currentTimeMillis());
@@ -36,7 +46,8 @@ public class CommonUtils {
 	 * 
 	 * @param httpServletRequest
 	 * @param httpServletResponse
-	 * @param imageUrl 图片物理路径
+	 * @param imageUrl
+	 *            图片物理路径
 	 */
 	public static void httpWriteImage(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			String imageUrl) {
@@ -139,5 +150,48 @@ public class CommonUtils {
 			paramMap.put(pArr[0], pArr[1]);
 		}
 		return paramMap;
+	}
+
+	/**
+	 * 获取当前session存储的信息
+	 */
+	public static CurrentSessionDetail getCurrentSession(HttpServletRequest httpServletRequest) {
+		return getCurrentSession(httpServletRequest.getSession(true));
+	}
+
+	/**
+	 * 获取当前session存储的信息
+	 */
+	public static CurrentSessionDetail getCurrentSession(HttpSession httpSession) {
+		Object object = httpSession.getAttribute(CommConst.AppConf.CURRENT_SESSION);
+		CurrentSessionDetail currentSessionDetail = null;
+		if (null == object) {
+			currentSessionDetail = new CurrentSessionDetail();
+			setCurrentSessionDetail(httpSession,currentSessionDetail);
+		}else{
+			currentSessionDetail = (CurrentSessionDetail)object;
+		}
+		return currentSessionDetail;
+	}
+
+	/**
+	 * 设置当前session存储信息
+	 * 
+	 * @param httpServletRequest
+	 * @param currentSessionDetail
+	 */
+	public static void setCurrentSessionDetail(HttpServletRequest httpServletRequest,
+			CurrentSessionDetail currentSessionDetail) {
+		setCurrentSessionDetail(httpServletRequest.getSession(true), currentSessionDetail);
+	}
+
+	/**
+	 * 设置当前session存储信息
+	 * 
+	 * @param httpServletRequest
+	 * @param currentSessionDetail
+	 */
+	public static void setCurrentSessionDetail(HttpSession httpSession, CurrentSessionDetail currentSessionDetail) {
+		httpSession.setAttribute(CommConst.AppConf.CURRENT_SESSION, currentSessionDetail);
 	}
 }

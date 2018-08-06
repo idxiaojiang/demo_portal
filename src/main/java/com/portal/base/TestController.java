@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.portal.base.utility.CommonUtils;
+import com.portal.base.utility.CommUtils;
 import com.portal.base.utility.VerifyCodeUtils;
 
 @Controller
@@ -18,7 +18,7 @@ public class TestController {
 		if ("login".equals(codeType)) {
 			String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
 		    String path = VerifyCodeUtils.outputVerifyImageRetPath(verifyCode);
-		    CommonUtils.httpWriteImage(httpServletRequest, httpServletResponse, path);
+		    CommUtils.httpWriteImage(httpServletRequest, httpServletResponse, path);
 		}
 	}
 }

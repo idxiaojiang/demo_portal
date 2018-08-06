@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.portal.base.SystemParams;
 import com.portal.base.entity.ResultDataVO;
-import com.portal.base.utility.CommonUtils;
+import com.portal.base.utility.CommUtils;
 import com.portal.note.entity.NoteDetailVO;
 import com.portal.userCenter.service.IUserCenterService;
 
@@ -92,7 +92,7 @@ public class UserCenterController {
 			String prefix = (int) (Math.random() * 100000) + "" + System.currentTimeMillis();
 			
 			//复制文件
-			String newFileName = CommonUtils.uploadFile(multipartFile, realPath, prefix);
+			String newFileName = CommUtils.uploadFile(multipartFile, realPath, prefix);
 			
 			//响应给前端页面,获取图片的地址
 			Map<String, String> map = new HashMap<String, String>();
